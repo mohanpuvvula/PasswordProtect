@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload PDF</title>
+</head>
+<body>
+ {% include 'include/navbar.html' %}
+ <div class="container">
+        <div class="text-center" style="color: #fff; font-size: 3rem;"><h1 class="hed"><i>Upload PDF</i></h1></div>
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="/encryption/upload" enctype="multipart/form-data">
+                <h4> Please upload pdf </h4>
+                 <label for="files">Select PDF file/files:</label>
+                <input type="file" id="files" name="files" accept=".pdf" multiple required>
+                 <div class="text-center">
+                     <button type="submit" class="btn btn-primary">Upload and Encrypt</button>
+                </div>
+                 </form>
+                  </div>
+             </div>
+         </div>
+        </body>
+        </html>
+
+
+
+

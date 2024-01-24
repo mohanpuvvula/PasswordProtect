@@ -1,0 +1,30 @@
+{% include 'include/header.html' %}
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" href="/">
+    <img src="{{ url_for('static', filename='images/pdf.png') }}" width="110px" alt="PDF Logo">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.logout') }}"><b>Logout</b></a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.login') }}"><b>Login</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.register') }}"><b>Register</b></a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+{% include 'include/footer.html' %}

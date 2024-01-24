@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Encrypted PDF</title>
+</head>
+<body>
+      {% include 'include/navbar.html' %}
+      <div class="container">
+        <div class="text-center" style="color: #fff; font-size: 3rem;"><h1 class="hed"><i>Download files</i></h1></div>
+        <div class="card">
+            <div class="card-body">
+             <h4> Click the button below to download the encrypted PDF:</h4>
+             <a href="{{ url_for('encryption.download_files', file_name=file_name) }}" download="encrypted_file.pdf">
+          <div class="text-center">
+                     <button type="submit" class="btn btn-primary">Download Encrypted PDF</button>
+          </div>
+             </a>
+            </div>
+        </div>
+      </div>
+</body>
+
+</html>

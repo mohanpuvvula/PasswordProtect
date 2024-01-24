@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Protect</title>
+    <style>
+        .button-container {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+        .button {
+  margin: 40px;
+}
+        .center {
+        text-align: center;
+    }
+        .right {
+            text-align: right;
+            padding: 50px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    {% include 'include/navbar.html' %}
+     <div class = center>
+  <h1><b> Password Protect</b></h1>
+         </div>
+   <div id="user-data">
+   <div class = right>
+       {% if current_user.is_authenticated %}
+      <h4><b>My Details</b></h4>
+      <h5>Email: {{ user.email }}</h5>
+           <h5>Username: {{ user.username }}</h5>
+       {% else %}
+{% endif %}
+   </div>
+    </div>
+    <div class="container">
+        <div class="text-center" style="color: #fff; font-size: 3rem;"><h1 class="hed"><i>Password Protect</i></h1></div>
+        <div class="card">
+            <div class="card-body">
+                <form action="/" method="POST" onsubmit="return validateForm()">
+                    <label for="email"><b>Enter registered email address:</b></label>
+                      <input type="email" name="user-email" id="user-email" class="form-control" required>
+                       <div class="button-container">
+                              <div class="text-center">
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                       </div>
+                        </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
