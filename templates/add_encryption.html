@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Encryption To PDF</title>
+</head>
+<body>
+    {% include 'include/navbar.html' %}
+    <div class="container">
+        <div class="text-center" style="color: #fff; font-size: 3rem;">
+            <h1 class="hed"><i>Add Encryption To PDF</i></h1>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{{ url_for('encryption.encryption', file_path=file_path) }}">
+                    <label for="use_random_password">
+                        <input type="checkbox" id="use_random_password" name="use_random_password" value="1">
+                        Use random password
+                    </label>
+                    <br>
+                    <label for="password">Enter Password:</label>
+                    <input type="password" id="password" name="password" >
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Encrypt PDF</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

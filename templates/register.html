@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% include 'include/header.html' %}
+<style>
+
+    .error-message {
+      color: red;
+    }
+      body {
+      font-family: Times new roman;
+      overflow-x: hidden;
+    }
+        .center {
+        text-align: center;
+    }
+</style>
+
+<script>
+  $(document).ready(function() {
+    $("form").submit(function(e) {
+      e.preventDefault();
+
+      var userName = $("#user-name").val();
+      var mobileNumber = $("#user-mobile-number").val();
+      var email = $("#user-email").val();
+      var password = $("#user-password").val();
+      var mobileRegex = /^\d{10}$/;
+
+
+      var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        $("#password-error").text("Please enter a valid password. It should be 8 characters or more, containing at least one capital letter and one special character.");
+        return;
+      } else {
+        $("#password-error").text("");
+      }
+
+      if (userName.trim() === "") {
+        $("#user-name-error").text("Please enter your first name.");
+        return;
+      } else {
+        $("#user-name-error").text("");
+      }
+
+
+      if (email.trim() === "") {
+        $("#email-error").text("Please enter your email address.");
+        return;
+      } else {
+        $("#email-error").text("");
+      }
+      this.submit();
+    });
+  });
+</script>
+<title>User Register</title>
+</head>
+<body>
+{% include 'include/navbar.html' %}
+<div class = center>
+  <h1><b> User Registration Page</b></h1>
+  </div>
+<div class="img">
+   <div class="container">
+    <div class="card w-50 mx-auto my-3 float-center">
+      <div class="card-header text-center">Registration Form</div>
+      <div class="card-body">
+       <form method="post" action="{{ url_for('user.register') }}" >
+          {{ csrf_token }}
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" name="user-email" id="user-email" class="form-control" required>
+            <div id="email-error" class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label>Username</label>
+              <input type="text" name="user-name" id="user-name" class="form-control" required>
+              <div id="username-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+          <label>Mobile number</label>
+             <input type="text" name="user-number" id="user-number" class="form-control" required>
+             <div id="mobile-error" class="error-message"></div>
+                </div>
+              <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="user-password" id="user-password" class="form-control" required>
+            <div id="password-error" class="error-message"></div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% include 'include/footer.html' %}
+</body>
+</html>
+
