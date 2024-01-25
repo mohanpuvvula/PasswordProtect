@@ -13,4 +13,6 @@ db = SQLAlchemy(app)
 # Define your models and other database-related code here
 
 if __name__ == '__main__':
-    app.run()
+    # Create database tables if they don't exist
+    with app.app_context():
+        db.create_all()
