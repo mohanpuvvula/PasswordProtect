@@ -6,7 +6,7 @@ from flask_login import UserMixin
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/myconnection'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://mohanpuvvula:Manoj@1234@mohanpuvvula.mysql.pythonanywhere-services.com'
 
 
 db = SQLAlchemy(app)

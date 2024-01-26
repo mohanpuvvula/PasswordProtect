@@ -7,7 +7,7 @@ from flask_login import login_required, current_user, logout_user, login_user
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/myconnection'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://mohanpuvvula:Manoj@1234@mohanpuvvula.mysql.pythonanywhere-services.com'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'xyzabc'
