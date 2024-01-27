@@ -7,8 +7,8 @@ from flask_login import login_required, current_user, logout_user, login_user
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://mohanpuvvula:Manoj@1234@mohanpuvvula.mysql.pythonanywhere-services.com/myconnection'
-
+db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'database.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'xyzabc'
 login_manager = LoginManager(app)
