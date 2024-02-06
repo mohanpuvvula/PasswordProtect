@@ -3,15 +3,22 @@
 <head>
 {% include 'include/header.html' %}
 <style>
-
     .error-message {
       color: red;
     }
-      body {
+    body {
       font-family: Times new roman;
       overflow-x: hidden;
     }
-        .center {
+    .center {
+      text-align: center;
+    }
+
+    .success-message {
+        display: none;
+        background-color: #4CAF50;
+        color: white;
+        padding: 20px;
         text-align: center;
     }
 </style>
@@ -22,11 +29,10 @@
       e.preventDefault();
 
       var userName = $("#user-name").val();
-      var mobileNumber = $("#user-mobile-number").val();
+      var mobileNumber = $("#user-number").val();
       var email = $("#user-email").val();
       var password = $("#user-password").val();
       var mobileRegex = /^\d{10}$/;
-
 
       var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordRegex.test(password)) {
@@ -43,7 +49,6 @@
         $("#user-name-error").text("");
       }
 
-
       if (email.trim() === "") {
         $("#email-error").text("Please enter your email address.");
         return;
@@ -58,15 +63,25 @@
 </head>
 <body>
 {% include 'include/navbar.html' %}
-<div class = center>
-  <h1><b> User Registration Page</b></h1>
-  </div>
+<div class="center">
+  <h1><b>User Registration Page</b></h1>
+</div>
 <div class="img">
-   <div class="container">
+  <div class="container">
     <div class="card w-50 mx-auto my-3 float-center">
       <div class="card-header text-center">Registration Form</div>
       <div class="card-body">
-       <form method="post" action="{{ url_for('user.register') }}" >
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div class="alert alert-success" role="alert">{{ message }}</div>
+                {% elif category == 'error' %}
+                    <div class="alert alert-danger" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+
+        <form method="post" action="{{ url_for('user.register') }}">
           {{ csrf_token }}
           <div class="form-group">
             <label>Email address</label>
@@ -75,15 +90,15 @@
           </div>
           <div class="form-group">
             <label>Username</label>
-              <input type="text" name="user-name" id="user-name" class="form-control" required>
-              <div id="username-error" class="error-message"></div>
-            </div>
-            <div class="form-group">
-          <label>Mobile number</label>
-             <input type="text" name="user-number" id="user-number" class="form-control" required>
-             <div id="mobile-error" class="error-message"></div>
-                </div>
-              <div class="form-group">
+            <input type="text" name="user-name" id="user-name" class="form-control" required>
+            <div id="username-error" class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label>Mobile number</label>
+            <input type="text" name="user-number" id="user-number" class="form-control" required>
+            <div id="mobile-error" class="error-message"></div>
+          </div>
+          <div class="form-group">
             <label>Password</label>
             <input type="password" name="user-password" id="user-password" class="form-control" required>
             <div id="password-error" class="error-message"></div>
@@ -95,7 +110,7 @@
       </div>
     </div>
   </div>
+</div>
 {% include 'include/footer.html' %}
 </body>
 </html>
-

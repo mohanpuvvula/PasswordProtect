@@ -22,7 +22,7 @@
                 <h3><b>Encryption Successful</b></h3>
             <h4>Encrypted file: {{ file_name }}</h4>
             <h4>Click the button below to download the encrypted PDF:</h4>
-            <a href="{{ url_for('encryption.download_files', file_name=file_name) }}" download="{{ file_name }}">
+            <a href="{{ url_for('encryption.download_zip', file_name=file_name) }}" download="{{ file_name }}">
                <div class="button-container">
                     <div class="text-center">
                   <button type="submit" class="btn btn-secondary" onclick="redirectToHome()" >

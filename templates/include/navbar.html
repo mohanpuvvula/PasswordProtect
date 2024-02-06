@@ -1,7 +1,27 @@
-{% include 'include/header.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 50px;
+    }
 
+    h7 {
+      color: #3498db;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+{% include 'include/header.html' %}
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a class="navbar-brand" href="/">
+
+    <a class="navbar-brand" href="/">
     <img src="{{ url_for('static', filename='images/pdf.png') }}" width="110px" alt="PDF Logo">
   </a>
 
@@ -14,12 +34,10 @@
     <ul class="navbar-nav ml-auto">
       {% if current_user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('user.logout') }}"><b>Logout</b></a>
+            <h7> Welcome {{ user.username }} </h7>
+          <a class="nav-link" href="{{ url_for('logout') }}"><b>Logout</b></a>
         </li>
       {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('user.login') }}"><b>Login</b></a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('user.register') }}"><b>Register</b></a>
         </li>
@@ -28,3 +46,5 @@
   </div>
 </nav>
 {% include 'include/footer.html' %}
+</body>
+</html>
