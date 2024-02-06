@@ -1,0 +1,31 @@
+name: Push-to-EC2
+
+# Trigger deployment only on push to main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to EC2 on main branch push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+
+      - name: Install SSH client
+        run: sudo apt-get install -y ssh
+
+      - name: Copy files to EC2 instance
+        run: scp -i ${{ secrets.EC2_SSH_KEY }} -r ./ ${{ secrets.USERNAME }}@ec2-16-170-233-18.eu-north-1.compute.amazonaws.com:/var/www/html/
+
+      - name: SSH into EC2 instance and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ec2-16-170-233-18.eu-north-1.compute.amazonaws.com
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@ec2-16-170-233-18.eu-north-1.compute.amazonaws.com 'sudo apt-get update && sudo apt-get install -y apache2 && sudo systemctl start apache2 && sudo systemctl enable apache2 && sudo mv /var/www/html/* /var/www/html/old && sudo mv /var/www/html/index.html /var/www/html/old'
