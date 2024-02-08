@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: 0.0
 os: linux  # Specify the operating system (Linux in this case)
 resources:
@@ -16,3 +17,40 @@ resources:
           ApplicationStart:
             - location: scripts/start_server.sh
               timeout: 300
+=======
+name: Push-to-EC2
+
+# Trigger deployment only on push to main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to EC2 on master branch push
+    runs-on: amazonlinux-2
+
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo yum -y update
+            sudo yum install -y httpd
+            sudo systemctl start httpd
+            sudo systemctl enable httpd
+            cd /home
+            sudo mv * /var/www/html
+>>>>>>> 927af9eb612189b8dfeefbcfe9ea0da9ef3d8639
