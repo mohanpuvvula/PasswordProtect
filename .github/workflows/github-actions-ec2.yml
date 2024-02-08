@@ -7,12 +7,10 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: Deploy to EC2 on master branch push
-    runs-on: amazonlinux
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout the files
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Deploy to Server
