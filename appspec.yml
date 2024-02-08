@@ -1,0 +1,17 @@
+version: 0.0
+resources:
+  - myResource:
+      - type: EC2
+        lifecycleEventHook:
+          ApplicationStop:
+            - location: scripts/stop_server.sh
+              timeout: 300
+          BeforeInstall:
+            - location: scripts/before_install.sh
+              timeout: 300
+          AfterInstall:
+            - location: scripts/after_install.sh
+              timeout: 300
+          ApplicationStart:
+            - location: scripts/start_server.sh
+              timeout: 300
