@@ -1,5 +1,5 @@
 version: 0.0
-os: linux  # Specify the operating system (Linux)
+os: linux  
 resources:
   - myResource:
       - type: EC2
