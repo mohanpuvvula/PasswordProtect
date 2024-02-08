@@ -18,13 +18,13 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_USER: ec2_user   # Replace with your EC2 instance's username
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
+          username: ec2_user   # Replace with your EC2 instance's username
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo yum -y update
